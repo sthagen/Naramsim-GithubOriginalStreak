@@ -86,10 +86,10 @@ function inject() {
     const body = document.body;
     const vCardSelector = document.getElementsByClassName('vcard-username');
     const loginSelector = document.querySelectorAll('.dropdown-header strong.css-truncate-target');
-    const daysSelector = document.getElementsByClassName('day');
+    const daysSelector = document.querySelectorAll('.ContributionCalendar-day[data-count]');
     const modalOverlay = document.getElementsByClassName('modal-backdrop');
 
-    const customStartStreakHintText = `<div class="anim-scale-in js-menu-content dropdown-menu-content">
+    const customStartStreakHintText = `<div style="display: none" class="anim-scale-in js-menu-content dropdown-menu-content">
     <div class="dropdown-menu dropdown-menu-w" style="width:300px;padding-top:1px;">
         <div class="signed-commit-header flex-table px-3">
             <div class="flex-table-item">
@@ -163,6 +163,7 @@ function inject() {
         // days[23].attributes['data-count'].value = 0
 
         // for each day from last day (current day) to first available day
+
         days.forEach((day, index) => {
             const contributionCount = parseInt(day.attributes['data-count'].value, 10);
             const contributionDate = day.attributes['data-date'].value;
@@ -293,11 +294,11 @@ function inject() {
                     totalContributionsText
                 ], [
                     'Longest streak',
-                    `${longestStreak.toLocaleString()} days`,
+                    `${longestStreak.toLocaleString()} ${longestStreak == 1 ? 'day' : 'days'}`,
                     longestStreakText
                 ], [
                     'Current streak',
-                    `${currentStreak.toLocaleString()} days`,
+                    `${currentStreak.toLocaleString()} ${currentStreak == 1 ? 'day' : 'days'}`,
                     currentStreakText
                 ]
             ];
